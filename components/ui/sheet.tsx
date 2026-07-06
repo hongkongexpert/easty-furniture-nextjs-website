@@ -9,10 +9,22 @@ const Sheet = Dialog.Root;
 const SheetTrigger = Dialog.Trigger;
 const SheetClose = Dialog.Close;
 
-const SheetContent = React.forwardRef<React.ElementRef<typeof Dialog.Content>, React.ComponentPropsWithoutRef<typeof Dialog.Content>>(({ className, children, ...props }, ref) => (
+type SheetContentProps = React.ComponentPropsWithoutRef<typeof Dialog.Content> & {
+  side?: "left" | "right";
+};
+
+const SheetContent = React.forwardRef<React.ElementRef<typeof Dialog.Content>, SheetContentProps>(({ className, children, side = "right", ...props }, ref) => (
   <Dialog.Portal>
     <Dialog.Overlay className="fixed inset-0 z-50 bg-black/55" />
-    <Dialog.Content ref={ref} className={cn("fixed right-0 top-0 z-50 h-full w-80 border-l border-border bg-background p-6 shadow-lg", className)} {...props}>
+    <Dialog.Content
+      ref={ref}
+      className={cn(
+        "fixed top-0 z-50 h-full w-80 bg-background p-6 shadow-lg",
+        side === "right" ? "right-0 border-l border-border" : "left-0 border-r border-border",
+        className,
+      )}
+      {...props}
+    >
       {children}
       <Dialog.Close className="absolute right-4 top-4 rounded text-muted-foreground hover:text-primary">
         <X className="size-5" />
