@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground antialiased; }
+}
+
+@layer components {
+  .glass-card { @apply border border-white/30 bg-white/70 backdrop-blur-xl; }
+  .active-filter { @apply border-l-[3px] border-primary bg-surface-container-low pl-3 text-foreground; }
+}
