@@ -18,12 +18,9 @@ export function ProductCard({ product, square = false, locale = "en" }: { produc
         <h3 className="mb-1 text-base font-semibold leading-tight sm:mb-2 sm:text-[24px] sm:leading-8">{product.name}</h3>
         <p className="line-clamp-2 text-xs leading-4 text-muted-foreground sm:line-clamp-3 sm:text-sm sm:leading-5">{product.summary}</p>
         <div className="mt-2 hidden flex-wrap gap-2 sm:mt-4 sm:flex">{product.tags.slice(0, 3).map((tag) => <Badge key={tag}>{tag}</Badge>)}</div>
-        <div className="mt-auto grid grid-cols-2 gap-2 pt-3 sm:pt-stack-md">
-          <Button asChild variant="outline" size="sm" className="h-9 text-[10px] font-bold uppercase tracking-wider sm:text-xs">
+        <div className="mt-auto pt-3 sm:pt-stack-md">
+          <Button asChild variant="outline" size="sm" className="h-9 w-full text-[10px] font-bold uppercase tracking-wider sm:text-xs">
             <Link href={localizedPath(locale, `/products/${product.slug}`)}>{dictionary.productDetail.viewDetails}</Link>
-          </Button>
-          <Button asChild size="sm" className="h-9 text-[10px] font-bold uppercase tracking-wider sm:text-xs">
-            <Link href={localizedPath(locale, "/contact")}>{dictionary.productDetail.inquiry}</Link>
           </Button>
         </div>
       </CardContent>
