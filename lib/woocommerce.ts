@@ -48,8 +48,8 @@ function baseSlug(slug: string) {
 function localizedProductText(slug: string, lang?: string) {
   const key = baseSlug(slug);
   const names: Record<string, { es?: string; ar?: string }> = {
-    "whiteboard-plus": { es: "Pizarra Whiteboard+", ar: "Whiteboard+" },
-    "whiteboard-plus-series": { es: "Pizarra Whiteboard+", ar: "Whiteboard+" },
+    "whiteboard-plus": { es: "Pizarra Whiteboard+", ar: "سبورة بيضاء Whiteboard+" },
+    "whiteboard-plus-series": { es: "Pizarra Whiteboard+", ar: "سبورة بيضاء Whiteboard+" },
     "storage-locker": { es: "Taquilla de almacenamiento", ar: "خزانة تخزين" },
     "storage-locker-series": { es: "Taquilla de almacenamiento", ar: "خزانة تخزين" },
     "sofa-collection": { es: "Colección de sofás", ar: "مجموعة الأرائك" },
