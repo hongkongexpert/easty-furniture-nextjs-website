@@ -123,5 +123,5 @@ export async function getProduct(slug: string) {
   const storeUrl = normalizeStoreUrl();
   if (!storeUrl) return fallbackProducts.find((product) => product.slug === slug);
   const [product] = await getWooProducts({ slug, per_page: "1" });
-  return product;
+  return product || fallbackProducts.find((item) => item.slug === slug);
 }
