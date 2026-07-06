@@ -40,7 +40,7 @@ export default async function Home() {
           <div className="max-w-2xl text-white">
             <h1 className="mb-stack-md text-3xl font-bold leading-tight tracking-normal sm:text-5xl sm:leading-[56px]">{dictionary.home.heroTitle}</h1>
             <p className="mb-stack-lg text-sm leading-relaxed text-surface-variant sm:text-lg sm:leading-7">{dictionary.home.heroText}</p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-stack-md">
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-stack-md">
               <Button asChild size="lg" className="w-full sm:w-auto"><Link href={localizedPath(locale, "/product-series")}>{dictionary.home.exploreProducts}</Link></Button>
               <Button asChild size="lg" variant="inverse" className="w-full sm:w-auto"><Link href={localizedPath(locale, "/about")}>{dictionary.home.companyProfile}</Link></Button>
             </div>
