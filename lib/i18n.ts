@@ -165,7 +165,8 @@ export const translations = {
       excellenceText2: "Every component is selected for durability, repeatability, and large-scale commercial integration.",
       specs: "Technical Specifications",
       related: "Related Products",
-      viewDetails: "View Details"
+      viewDetails: "View Details",
+      inquiry: "Inquiry"
     },
     manufacturing: {
       eyebrow: "Manufacturing",
@@ -330,7 +331,8 @@ export const translations = {
       excellenceText2: "Cada componente se selecciona por durabilidad, repetibilidad e integración comercial a gran escala.",
       specs: "Especificaciones Técnicas",
       related: "Productos Relacionados",
-      viewDetails: "Ver Detalles"
+      viewDetails: "Ver Detalles",
+      inquiry: "Consulta"
     },
     manufacturing: {
       eyebrow: "Fabricación",
@@ -495,7 +497,8 @@ export const translations = {
       excellenceText2: "يتم اختيار كل مكون للمتانة وقابلية التكرار والتكامل التجاري واسع النطاق.",
       specs: "المواصفات الفنية",
       related: "منتجات ذات صلة",
-      viewDetails: "عرض التفاصيل"
+      viewDetails: "عرض التفاصيل",
+      inquiry: "استفسار"
     },
     manufacturing: {
       eyebrow: "التصنيع",
