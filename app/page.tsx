@@ -32,7 +32,7 @@ export default async function Home() {
   const dictionary = t(locale);
   const featuredProducts = (await getProducts(6)).slice(0, 6);
   return (
-    <main className="pt-20">
+    <main>
       <section className="relative flex h-[70vh] min-h-[480px] items-end overflow-hidden pb-10 sm:h-[85vh] sm:min-h-[600px] sm:items-center sm:pb-0">
         <Image src="/images/02_home_hero_office_workstation.png" alt="Commercial office furniture environment" fill priority className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent sm:bg-gradient-to-r sm:from-black/60 sm:to-transparent" />
@@ -40,7 +40,7 @@ export default async function Home() {
           <div className="max-w-2xl text-white">
             <h1 className="mb-stack-md text-3xl font-bold leading-tight tracking-normal sm:text-5xl sm:leading-[56px]">{dictionary.home.heroTitle}</h1>
             <p className="mb-stack-lg text-sm leading-relaxed text-surface-variant sm:text-lg sm:leading-7">{dictionary.home.heroText}</p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-stack-md">
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-stack-md">
               <Button asChild size="lg" className="w-full sm:w-auto"><Link href={localizedPath(locale, "/product-series")}>{dictionary.home.exploreProducts}</Link></Button>
               <Button asChild size="lg" variant="inverse" className="w-full sm:w-auto"><Link href={localizedPath(locale, "/about")}>{dictionary.home.companyProfile}</Link></Button>
             </div>

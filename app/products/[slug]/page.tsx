@@ -25,7 +25,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const gallery = product.gallery.length ? product.gallery : [product.image];
 
   return (
-    <main className="pt-32">
+    <main>
       <div className="container">
         <div className="mb-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
           <Link href={localizedPath(locale, "/")}>{dictionary.nav.home}</Link>

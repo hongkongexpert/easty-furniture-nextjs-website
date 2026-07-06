@@ -38,7 +38,7 @@ const languageMenu: { locale: Locale; label: string }[] = [
 export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   const pathname = usePathname();
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-border bg-surface">
+    <header className="w-full border-b border-border bg-surface">
       <div className="container flex h-20 items-center justify-between gap-6">
         <Link href={localizedPath(locale, "/")} className="flex h-20 items-center">
           <Image src="/images/01_easty_logo_trimmed.png" alt="EASTY Furniture" width={180} height={61} priority className="h-12 w-auto object-contain" />

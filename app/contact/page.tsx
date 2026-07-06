@@ -12,7 +12,7 @@ export default async function ContactPage() {
   const dictionary = t(locale);
   const contact = dictionary.contact;
   return (
-    <main className="container pt-32 pb-stack-lg">
+    <main className="container py-stack-lg">
       <section className="mb-stack-lg">
         <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">{contact.eyebrow}</p>
         <h1 className="mb-stack-sm text-5xl font-bold leading-[56px]">{contact.title}</h1>
