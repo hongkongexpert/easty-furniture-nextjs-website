@@ -6,9 +6,10 @@ import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { sectors, trendingProducts } from "@/lib/data";
+import { sectors } from "@/lib/data";
 import { categoryLabel, localizedPath, t } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n-server";
+import { getProducts } from "@/lib/woocommerce";
 
 const videoImages = [
   "/images/10_ada_training_table_scene.jpg",
@@ -27,6 +28,7 @@ const videoLinks = [
 export default async function Home() {
   const locale = await getLocale();
   const dictionary = t(locale);
+  const featuredProducts = (await getProducts(6, locale)).slice(0, 6);
 
   return (
     <main>
@@ -74,7 +76,7 @@ export default async function Home() {
             <SectionHeading eyebrow={dictionary.home.hotEyebrow} title={dictionary.home.hotTitle} className="mx-auto max-w-lg text-center [&>h2]:text-center [&>p]:text-center" />
           </div>
           <div className="mt-stack-lg grid grid-cols-2 gap-3 sm:gap-gutter lg:grid-cols-3">
-            {trendingProducts.map((product) => <ProductCard product={product} locale={locale} key={product.id} />)}
+            {featuredProducts.map((product) => <ProductCard product={product} locale={locale} key={product.id} />)}
           </div>
         </div>
       </section>

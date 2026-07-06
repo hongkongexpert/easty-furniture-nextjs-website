@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronDown, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -37,6 +37,9 @@ const languageMenu: { locale: Locale; label: string }[] = [
 
 export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
+  const currentPath = search ? `${pathname}?${search}` : pathname;
   return (
     <header className="w-full border-b border-border bg-surface">
       <div className="container flex h-20 items-center justify-between gap-6">
@@ -70,9 +73,9 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
             <div className="invisible absolute left-0 top-full z-50 pt-3 opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
               <div className="min-w-36 bg-surface py-2 shadow-sm">
                 {languageMenu.map((item) => (
-                  <Link className="block px-4 py-2 text-xs font-bold uppercase tracking-[0.05em] text-muted-foreground hover:text-primary focus-visible:outline-none focus-visible:text-primary" href={switchLocalePath(item.locale, pathname)} key={item.locale}>
+                  <a className="block px-4 py-2 text-xs font-bold uppercase tracking-[0.05em] text-muted-foreground hover:text-primary focus-visible:outline-none focus-visible:text-primary" href={switchLocalePath(item.locale, currentPath)} key={item.locale}>
                     {item.label}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
@@ -116,9 +119,9 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
               <div className="flex flex-col gap-0 pl-2">
                 {languageMenu.map((item) => (
                   <SheetClose asChild key={item.locale}>
-                    <Link className="py-2 text-xs font-semibold text-muted-foreground hover:text-primary transition-colors" href={switchLocalePath(item.locale, pathname)}>
+                    <a className="py-2 text-xs font-semibold text-muted-foreground hover:text-primary transition-colors" href={switchLocalePath(item.locale, currentPath)}>
                       {item.label}
-                    </Link>
+                    </a>
                   </SheetClose>
                 ))}
               </div>

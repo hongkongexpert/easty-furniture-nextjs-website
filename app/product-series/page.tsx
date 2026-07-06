@@ -18,7 +18,7 @@ export default async function ProductSeriesPage({ searchParams }: { searchParams
   const dictionary = t(locale);
   const params = await searchParams;
   const activeCategory = params?.category || "all-products";
-  const productList = await getProducts(100);
+  const productList = await getProducts(100, locale);
   const filteredProducts = activeCategory === "all-products" ? productList : productList.filter((product) => categorySlug(product.category) === activeCategory);
 
   const filterLinks = (

@@ -10,7 +10,7 @@ export function ProductCard({ product, square = false, locale = "en" }: { produc
   const dictionary = t(locale);
   return (
     <Card className="group flex flex-col overflow-hidden shadow-industrial transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-industrial-red">
-      <Link href={localizedPath(locale, `/products/${product.slug}`)} className={square ? "relative block aspect-square overflow-hidden bg-surface-container" : "relative block aspect-[4/3] overflow-hidden bg-surface-container"}>
+      <Link href={localizedPath(locale, `/product/${product.slug}`)} className={square ? "relative block aspect-square overflow-hidden bg-surface-container" : "relative block aspect-[4/3] overflow-hidden bg-surface-container"}>
         <Image src={product.image} alt={product.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
       </Link>
       <CardContent className="flex flex-1 flex-col p-3 sm:p-stack-md">
@@ -20,7 +20,7 @@ export function ProductCard({ product, square = false, locale = "en" }: { produc
         <div className="mt-2 hidden flex-wrap gap-2 sm:mt-4 sm:flex">{product.tags.slice(0, 3).map((tag) => <Badge key={tag}>{tag}</Badge>)}</div>
         <div className="mt-auto pt-3 sm:pt-stack-md">
           <Button asChild variant="outline" size="sm" className="h-9 w-full text-[10px] font-bold uppercase tracking-wider sm:text-xs">
-            <Link href={localizedPath(locale, `/products/${product.slug}`)}>{dictionary.productDetail.viewDetails}</Link>
+            <Link href={localizedPath(locale, `/product/${product.slug}`)}>{dictionary.productDetail.viewDetails}</Link>
           </Button>
         </div>
       </CardContent>

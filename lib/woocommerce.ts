@@ -1,4 +1,5 @@
 import { products as fallbackProducts, Product } from "@/lib/data";
+import type { Locale } from "@/lib/i18n";
 
 type WooProduct = {
   id: number;
@@ -9,6 +10,7 @@ type WooProduct = {
   categories?: { name: string; slug?: string }[];
   images?: { src: string; alt?: string; name?: string }[];
   tags?: { name: string }[];
+  lang?: string;
 };
 
 function stripHtml(value = "") {
@@ -21,26 +23,94 @@ function normalizeStoreUrl() {
   return configuredUrl.replace(/^http:\/\//i, "https://");
 }
 
-function wooHeaders() {
+function wooCredentials() {
   const key = process.env.WOOCOMMERCE_CONSUMER_KEY;
   const secret = process.env.WOOCOMMERCE_CONSUMER_SECRET;
   if (!key || !secret) return null;
-
-  const token = Buffer.from(`${key}:${secret}`).toString("base64");
-  return {
-    Accept: "application/json",
-    Authorization: `Basic ${token}`,
-    "User-Agent": "EastyFurnitureFrontend/1.0"
-  };
+  return { key, secret };
 }
 
 function cleanName(item: WooProduct) {
+  const localizedName = localizedProductText(item.slug, item.lang).name;
+  if (localizedName) return localizedName;
   const nameMap: Record<string, string> = {
     "easty-e2cd7034": "PARCO Seating",
     ding: "DING Sofa",
     kylinc: "KYLINC Qilin"
   };
   return nameMap[item.slug] || item.name;
+}
+
+function baseSlug(slug: string) {
+  return slug.replace(/-(es|ar)$/, "");
+}
+
+function localizedProductText(slug: string, lang?: string) {
+  const key = baseSlug(slug);
+  const names: Record<string, { es?: string; ar?: string }> = {
+    "whiteboard-plus": { es: "Pizarra Whiteboard+", ar: "Whiteboard+" },
+    "whiteboard-plus-series": { es: "Pizarra Whiteboard+", ar: "Whiteboard+" },
+    "storage-locker": { es: "Taquilla de almacenamiento", ar: "خزانة تخزين" },
+    "storage-locker-series": { es: "Taquilla de almacenamiento", ar: "خزانة تخزين" },
+    "sofa-collection": { es: "Colección de sofás", ar: "مجموعة الأرائك" },
+    "parco-sofa-series": { es: "Serie de sofás PARCO", ar: "سلسلة أرائك PARCO" },
+    "so-sofa": { es: "Sofá SO", ar: "أريكة SO" },
+    "gem-sofa": { es: "Sofá GEM", ar: "أريكة GEM" },
+    ding: { es: "Sofá DING", ar: "أريكة DING" },
+    "easty-e2cd7034": { es: "Asientos", ar: "مقاعد" },
+    "partition-workstation-series": { es: "Serie de estaciones de trabajo PARTITION", ar: "سلسلة محطات عمل PARTITION" },
+    "multimedia-cabinet": { es: "Gabinete multimedia", ar: "خزانة وسائط متعددة" },
+    "hor-executive-office-series-i": { es: "Serie de oficina ejecutiva HOR I", ar: "سلسلة مكتب تنفيذي HOR I" },
+    "e-viva-series": { es: "Serie E-VIVA", ar: "سلسلة E-VIVA" },
+    "e-siu-series": { es: "Serie E-SIU", ar: "سلسلة E-SIU" },
+    "e-jane-series": { es: "Serie E-JANE", ar: "سلسلة E-JANE" },
+    "benching-steel-wood-desk-series": { es: "Serie de escritorios BENCHING acero-madera", ar: "سلسلة مكاتب BENCHING من الفولاذ والخشب" },
+    "balloon-height-adjustable-desk-series": { es: "Serie de escritorios regulables en altura BALLOON", ar: "سلسلة مكاتب BALLOON قابلة لتعديل الارتفاع" },
+    "staff-mesh-chair": { es: "Silla de malla para personal", ar: "كرسي شبكي للموظفين" },
+    "nap-chair": { es: "Silla de descanso", ar: "كرسي استراحة" },
+    "meeting-chair": { es: "Silla de reunion", ar: "كرسي اجتماعات" },
+    "bar-stool": { es: "Taburete de bar", ar: "كرسي بار" },
+    "ather-chair-series": { es: "Serie de sillas Ather", ar: "سلسلة كراسي Ather" },
+    kylinc: { es: "KYLINC Qilin", ar: "KYLINC Qilin" },
+    "qilin-series": { es: "Qilin", ar: "Qilin" },
+    "tv-cabinet": { es: "Mueble de TV", ar: "خزانة تلفاز" },
+    "suite-wall-view": { es: "Vista de pared de suite", ar: "واجهة جدار الجناح" },
+    "simple-convenient-hotel": { es: "Hotel simple y conveniente", ar: "فندق بسيط وعملي" },
+    "public-reception-area": { es: "Area de recepcion publica", ar: "منطقة استقبال عامة" },
+    "office-work": { es: "Trabajo de oficina", ar: "عمل مكتبي" },
+    "dining-room": { es: "Comedor", ar: "غرفة طعام" },
+    desk: { es: "Escritorio", ar: "مكتب" },
+    "bedside-wardrobe": { es: "Armario de cabecera", ar: "خزانة بجانب السرير" },
+    bedroom: { es: "Dormitorio", ar: "غرفة نوم" },
+    whiteboard: { es: "Pizarra", ar: "سبورة بيضاء" },
+    "training-consultation": { es: "Formacion y consulta", ar: "التدريب والاستشارات" },
+    "tea-table": { es: "Mesa de te", ar: "طاولة شاي" },
+    shirlly: { es: "SHIRLLY Sailay", ar: "SHIRLLY Sailay" },
+    "shirlly-sailay-series": { es: "SHIRLLY / Sailay", ar: "SHIRLLY / Sailay" },
+    "shirlly-negotiation-table": { es: "Mesa de negociacion SHIRLLY", ar: "طاولة تفاوض SHIRLLY" },
+    podium: { es: "Podio", ar: "منصة" },
+    "ada-training-table": { es: "Mesa de formacion Ada", ar: "طاولة تدريب Ada" },
+    "restaurant-furniture": { es: "Mobiliario para restaurante", ar: "أثاث المطاعم" },
+    library: { es: "Biblioteca", ar: "المكتبة" },
+    thinkin: { es: "Sillas de aula THINKIN", ar: "كراسي صفية THINKIN" },
+    "classroom-desk-series": { es: "Escritorio de aula", ar: "مكتب الفصل الدراسي" },
+    "apartment-style-bed": { es: "Cama estilo apartamento", ar: "سرير بنمط الشقة" },
+    "student-dormitory-bed": { es: "Cama de dormitorio estudiantil", ar: "سرير سكن الطلاب" },
+    "mobile-reading-table": { es: "Mesa de lectura movil", ar: "طاولة قراءة متحركة" },
+    "handcrafted-table-series": { es: "Serie de mesas artesanales", ar: "سلسلة طاولات يدوية الصنع" },
+    "lighting-fixtures": { es: "Luminarias", ar: "وحدات الإضاءة" },
+    "powder-coated-bar-counter": { es: "Barra con recubrimiento en polvo", ar: "منضدة بار مطلية بالبودرة" },
+    "powder-coating-series": { es: "Serie de recubrimiento en polvo", ar: "سلسلة الطلاء بالبودرة" },
+    "display-racks": { es: "Estanterias de exhibicion", ar: "رفوف العرض" },
+    "office-workstation-series": { es: "Serie de puestos de trabajo de oficina", ar: "سلسلة محطات العمل المكتبية" },
+    "office-chair-series": { es: "Serie de sillas de oficina", ar: "سلسلة كراسي المكتب" },
+    "lobby-lounge-series": { es: "Serie lounge para lobby", ar: "سلسلة صالات اللوبي" },
+    "reception-desk-series": { es: "Serie de mostradores de recepcion", ar: "سلسلة مكاتب الاستقبال" }
+  };
+
+  return {
+    name: lang === "ar" ? names[key]?.ar : lang === "es" ? names[key]?.es : undefined
+  };
 }
 
 function normalizeCategory(item: WooProduct) {
@@ -95,14 +165,19 @@ function toProduct(item: WooProduct): Product {
 async function getWooProducts(params: Record<string, string>) {
   try {
     const storeUrl = normalizeStoreUrl();
-    const headers = wooHeaders();
-    if (!storeUrl || !headers) return [];
+    const credentials = wooCredentials();
+    if (!storeUrl || !credentials) return [];
 
     const endpoint = new URL("/wp-json/wc/v3/products", storeUrl);
     Object.entries(params).forEach(([key, value]) => endpoint.searchParams.set(key, value));
+    endpoint.searchParams.set("consumer_key", credentials.key);
+    endpoint.searchParams.set("consumer_secret", credentials.secret);
 
     const response = await fetch(endpoint, {
-      headers,
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "EastyFurnitureFrontend/1.0"
+      },
       next: { revalidate: 60 }
     });
 
@@ -113,15 +188,19 @@ async function getWooProducts(params: Record<string, string>) {
   }
 }
 
-export async function getProducts(limit = 24): Promise<Product[]> {
+export async function getProducts(limit = 24, locale: Locale = "en"): Promise<Product[]> {
   const storeUrl = normalizeStoreUrl();
   if (!storeUrl) return fallbackProducts;
-  return getWooProducts({ per_page: String(limit) });
+  const localizedProducts = await getWooProducts({ per_page: String(limit), status: "publish", lang: locale });
+  if (localizedProducts.length || locale === "en") return localizedProducts;
+  return getWooProducts({ per_page: String(limit), status: "publish", lang: "en" });
 }
 
-export async function getProduct(slug: string) {
+export async function getProduct(slug: string, locale: Locale = "en") {
   const storeUrl = normalizeStoreUrl();
   if (!storeUrl) return fallbackProducts.find((product) => product.slug === slug);
-  const [product] = await getWooProducts({ slug, per_page: "1" });
-  return product || fallbackProducts.find((item) => item.slug === slug);
+  const [product] = await getWooProducts({ slug, per_page: "1", status: "publish", lang: locale });
+  if (product || locale === "en") return product || fallbackProducts.find((item) => item.slug === slug);
+  const [englishProduct] = await getWooProducts({ slug, per_page: "1", status: "publish", lang: "en" });
+  return englishProduct || fallbackProducts.find((item) => item.slug === slug);
 }
