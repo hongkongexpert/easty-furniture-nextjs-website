@@ -82,29 +82,53 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
         <Sheet>
           <SheetTrigger asChild><Button size="icon" variant="ghost" className="md:hidden"><Menu className="size-5" /></Button></SheetTrigger>
           <SheetContent>
-            <div className="mb-8 flex items-center gap-3"><Image src="/images/01_easty_logo_trimmed.png" alt="EASTY Furniture" width={150} height={51} className="h-11 w-auto object-contain" /></div>
-            <nav className="grid gap-3">
-              <SheetClose asChild><Link className="rounded border border-border px-4 py-3 text-sm font-bold uppercase tracking-[0.08em]" href={localizedPath(locale, "/")}>{dictionary.nav.home}</Link></SheetClose>
-              <SheetClose asChild><Link className="rounded border border-border px-4 py-3 text-sm font-bold uppercase tracking-[0.08em]" href={localizedPath(locale, "/product-series")}>{dictionary.nav.productSeries}</Link></SheetClose>
-              <div className="grid gap-2 border-l-4 border-primary pl-3">
+            <div className="mb-8 flex items-center">
+              <Image src="/images/01_easty_logo_trimmed.png" alt="EASTY Furniture" width={150} height={51} className="h-10 w-auto object-contain" />
+            </div>
+            <nav className="flex flex-col">
+              <SheetClose asChild>
+                <Link className="py-3 text-sm font-bold uppercase tracking-[0.08em] text-foreground hover:text-primary transition-colors" href={localizedPath(locale, "/")}>{dictionary.nav.home}</Link>
+              </SheetClose>
+              <div className="border-t border-border" />
+
+              <p className="pb-2 pt-3 text-sm font-bold uppercase tracking-[0.08em] text-foreground">{dictionary.nav.productSeries}</p>
+              <div className="flex flex-col gap-0 pl-2">
                 {productMenu.map((item) => (
                   <SheetClose asChild key={item.label}>
-                    <Link className="rounded bg-surface-container-low px-3 py-2 text-xs font-bold uppercase tracking-[0.06em] text-muted-foreground" href={localizedPath(locale, item.href)}>
+                    <Link className="py-2 text-xs font-semibold uppercase tracking-[0.06em] text-muted-foreground hover:text-primary transition-colors" href={localizedPath(locale, item.href)}>
                       {categoryLabel(locale, item.label)}
                     </Link>
                   </SheetClose>
                 ))}
               </div>
-              {nav.map(([label, href]) => <SheetClose asChild key={href}><Link className="rounded border border-border px-4 py-3 text-sm font-bold uppercase tracking-[0.08em]" href={localizedPath(locale, href)}>{dictionary.nav[label]}</Link></SheetClose>)}
-              <div className="grid gap-2 border-l-4 border-primary pl-3">
+              <div className="border-t border-border" />
+
+              {nav.map(([label, href]) => (
+                <SheetClose asChild key={href}>
+                  <Link className="py-3 text-sm font-bold uppercase tracking-[0.08em] text-foreground hover:text-primary transition-colors" href={localizedPath(locale, href)}>
+                    {dictionary.nav[label]}
+                  </Link>
+                </SheetClose>
+              ))}
+              <div className="border-t border-border" />
+
+              <p className="pb-2 pt-3 text-xs font-bold uppercase tracking-[0.08em] text-muted-foreground">{dictionary.nav.language}</p>
+              <div className="flex flex-col gap-0 pl-2">
                 {languageMenu.map((item) => (
                   <SheetClose asChild key={item.locale}>
-                    <Link className="rounded bg-surface-container-low px-3 py-2 text-xs font-bold uppercase tracking-[0.06em] text-muted-foreground" href={switchLocalePath(item.locale, pathname)}>
+                    <Link className="py-2 text-xs font-semibold text-muted-foreground hover:text-primary transition-colors" href={switchLocalePath(item.locale, pathname)}>
                       {item.label}
                     </Link>
                   </SheetClose>
                 ))}
               </div>
+              <div className="border-t border-border mt-4" />
+
+              <SheetClose asChild>
+                <Link href={localizedPath(locale, "/contact")} className="mt-6 inline-flex items-center justify-center bg-primary px-4 py-3 text-xs font-bold uppercase tracking-[0.08em] text-primary-foreground transition-opacity hover:opacity-90">
+                  {dictionary.nav.requestQuote}
+                </Link>
+              </SheetClose>
             </nav>
           </SheetContent>
         </Sheet>
