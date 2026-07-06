@@ -32,7 +32,7 @@ export default async function Home() {
   const dictionary = t(locale);
   const featuredProducts = (await getProducts(6)).slice(0, 6);
   return (
-    <main className="pt-20">
+    <main>
       <section className="relative flex h-[70vh] min-h-[480px] items-end overflow-hidden pb-10 sm:h-[85vh] sm:min-h-[600px] sm:items-center sm:pb-0">
         <Image src="/images/02_home_hero_office_workstation.png" alt="Commercial office furniture environment" fill priority className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent sm:bg-gradient-to-r sm:from-black/60 sm:to-transparent" />
