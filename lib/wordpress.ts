@@ -7,6 +7,8 @@ export type WordPressPost = {
   date: string;
   link: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   categories: string[];
 };
 
@@ -20,7 +22,14 @@ type WordPressPostResponse = {
   content?: { rendered?: string };
   categories?: number[];
   _embedded?: {
-    "wp:featuredmedia"?: { source_url?: string }[];
+    "wp:featuredmedia"?: {
+      source_url?: string;
+      media_details?: {
+        width?: number;
+        height?: number;
+        sizes?: Record<string, { source_url?: string; width?: number; height?: number }>;
+      };
+    }[];
     "wp:term"?: { id: number; name: string; taxonomy: string }[][];
   };
 };
@@ -91,7 +100,11 @@ function toPost(post: WordPressPostResponse): WordPressPost {
   const title = decodeEntities(stripHtml(post.title?.rendered || "Untitled"));
   const excerpt = decodeEntities(stripHtml(post.excerpt?.rendered || ""));
   const content = post.content?.rendered || "";
-  const image = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  const media = post._embedded?.["wp:featuredmedia"]?.[0];
+  const mediaSizes = media?.media_details?.sizes;
+  const image = mediaSizes?.large?.source_url || mediaSizes?.medium_large?.source_url || mediaSizes?.full?.source_url || media?.source_url;
+  const imageWidth = mediaSizes?.large?.width || mediaSizes?.medium_large?.width || mediaSizes?.full?.width || media?.media_details?.width;
+  const imageHeight = mediaSizes?.large?.height || mediaSizes?.medium_large?.height || mediaSizes?.full?.height || media?.media_details?.height;
   const categories = post._embedded?.["wp:term"]?.flat().filter((term) => term.taxonomy === "category").map((term) => term.name) || [];
 
   return {
@@ -103,6 +116,8 @@ function toPost(post: WordPressPostResponse): WordPressPost {
     date: post.date,
     link: post.link,
     image,
+    imageWidth,
+    imageHeight,
     categories
   };
 }

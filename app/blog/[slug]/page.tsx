@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays } from "lucide-react";
@@ -46,11 +45,6 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
         <section className="bg-surface-container-lowest">
           <div className="container py-stack-lg">
-            {post.image ? (
-              <div className="relative mb-stack-lg aspect-[16/9] overflow-hidden bg-surface-container">
-                <Image src={post.image} alt={post.title} fill priority className="object-cover" sizes="100vw" />
-              </div>
-            ) : null}
             <div className="mx-auto max-w-4xl bg-surface p-5 text-base leading-8 text-foreground shadow-industrial sm:p-10">
               <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: post.content }} />
             </div>

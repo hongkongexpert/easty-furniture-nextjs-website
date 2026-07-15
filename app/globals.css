@@ -15,6 +15,8 @@
   .wordpress-content h3 { @apply pt-3 text-xl font-semibold leading-7; }
   .wordpress-content p { @apply text-base leading-8 text-foreground; }
   .wordpress-content a { @apply font-semibold text-primary underline underline-offset-4; }
+  .wordpress-content img { @apply mx-auto h-auto max-w-full; }
+  .wordpress-content figure { @apply mx-auto max-w-full; }
   .wordpress-content ul { @apply list-disc space-y-2 pl-6; }
   .wordpress-content ol { @apply list-decimal space-y-2 pl-6; }
   .wordpress-content blockquote { @apply border-l-4 border-primary bg-surface-container-low p-4 text-muted-foreground; }

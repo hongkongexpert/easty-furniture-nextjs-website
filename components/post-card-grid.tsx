@@ -16,9 +16,9 @@ export function PostCardGrid({ posts, locale }: { posts: WordPressPost[]; locale
     <section className="grid gap-gutter md:grid-cols-2 xl:grid-cols-3">
       {posts.map((post) => (
         <Card className="group flex flex-col overflow-hidden shadow-industrial transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-industrial-red" key={post.id}>
-          <Link href={localizedPath(locale, `/blog/${post.slug}`)} className="relative block aspect-[4/3] overflow-hidden bg-surface-container">
+          <Link href={localizedPath(locale, `/blog/${post.slug}`)} className="relative flex aspect-[16/9] items-center justify-center overflow-hidden bg-surface-container-low">
             {post.image ? (
-              <Image src={post.image} alt={post.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src={post.image} alt={post.title} fill className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 33vw" />
             ) : (
               <Image src="/images/03_office_benching_workspace.png" alt="" fill className="object-cover opacity-70 transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
             )}
