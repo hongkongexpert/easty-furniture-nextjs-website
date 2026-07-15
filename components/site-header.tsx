@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { type Dictionary, type Locale, categoryLabel, localizedPath, switchLocalePath } from "@/lib/i18n";
 
-const nav = [["about", "/about"], ["contact", "/contact"]] as const;
+const nav = [["news", "/news"], ["awards", "/awards"], ["blog", "/blog"], ["about", "/about"], ["contact", "/contact"]] as const;
 
 const productMenu = [
   {

@@ -41,6 +41,9 @@ export const translations = {
       requestQuote: "Request Quote",
       home: "Home",
       products: "Products",
+      news: "News",
+      awards: "Awards",
+      blog: "Blog",
       company: "Company",
       procurement: "Procurement",
       manufacturing: "Manufacturing"
@@ -207,6 +210,9 @@ export const translations = {
       requestQuote: "Solicitar Cotización",
       home: "Inicio",
       products: "Productos",
+      news: "Noticias",
+      awards: "Premios",
+      blog: "Blog",
       company: "Empresa",
       procurement: "Compras",
       manufacturing: "Fabricación"
@@ -373,6 +379,9 @@ export const translations = {
       requestQuote: "طلب عرض سعر",
       home: "الرئيسية",
       products: "المنتجات",
+      news: "News",
+      awards: "Awards",
+      blog: "Blog",
       company: "الشركة",
       procurement: "المشتريات",
       manufacturing: "التصنيع"
