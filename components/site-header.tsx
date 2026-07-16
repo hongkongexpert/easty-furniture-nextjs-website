@@ -41,7 +41,7 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
   const search = searchParams.toString();
   const currentPath = search ? `${pathname}?${search}` : pathname;
   return (
-    <header className="w-full border-b border-border bg-surface">
+    <header className="w-full border-b border-[#e3e3e3] bg-surface">
       <div className="container flex h-20 items-center justify-between gap-6">
         <Link href={localizedPath(locale, "/")} className="flex h-20 items-center">
           <Image src="/images/01_easty_logo_trimmed.png" alt="EASTY Furniture" width={180} height={61} priority className="h-12 w-auto object-contain" />
@@ -92,7 +92,7 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
               <SheetClose asChild>
                 <Link className="py-3 text-sm font-bold uppercase tracking-[0.08em] text-foreground hover:text-primary transition-colors" href={localizedPath(locale, "/")}>{dictionary.nav.home}</Link>
               </SheetClose>
-              <div className="border-t border-border" />
+              <div className="border-t border-[#e3e3e3]" />
 
               <p className="pb-2 pt-3 text-sm font-bold uppercase tracking-[0.08em] text-foreground">{dictionary.nav.productSeries}</p>
               <div className="flex flex-col gap-0 pl-2">
@@ -104,7 +104,7 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
                   </SheetClose>
                 ))}
               </div>
-              <div className="border-t border-border" />
+              <div className="border-t border-[#e3e3e3]" />
 
               {nav.map(([label, href]) => (
                 <SheetClose asChild key={href}>
@@ -113,7 +113,7 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
                   </Link>
                 </SheetClose>
               ))}
-              <div className="border-t border-border" />
+              <div className="border-t border-[#e3e3e3]" />
 
               <p className="pb-2 pt-3 text-xs font-bold uppercase tracking-[0.08em] text-muted-foreground">{dictionary.nav.language}</p>
               <div className="flex flex-col gap-0 pl-2">
@@ -125,7 +125,7 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
                   </SheetClose>
                 ))}
               </div>
-              <div className="border-t border-border mt-4" />
+              <div className="border-t border-[#e3e3e3] mt-4" />
 
               <SheetClose asChild>
                 <Link href={localizedPath(locale, "/contact")} className="mt-6 inline-flex items-center justify-center bg-primary px-4 py-3 text-xs font-bold uppercase tracking-[0.08em] text-primary-foreground transition-opacity hover:opacity-90">
