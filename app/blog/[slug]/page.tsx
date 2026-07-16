@@ -45,7 +45,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
         <section className="bg-surface-container-lowest">
           <div className="container py-stack-lg">
-            <div className="mx-auto max-w-4xl bg-surface p-5 text-base leading-8 text-foreground shadow-industrial sm:p-10">
+            <div className="mx-auto max-w-6xl bg-surface p-5 text-base leading-8 text-foreground shadow-industrial sm:p-10">
               <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: post.content }} />
             </div>
           </div>
