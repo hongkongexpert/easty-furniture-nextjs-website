@@ -55,7 +55,7 @@ export default async function Home() {
           <div className="mt-stack-lg grid grid-cols-2 gap-3 sm:gap-gutter lg:grid-cols-4">
             {dictionary.home.videos.map(([title, text], index) => (
               <a href={videoLinks[index]} target="_blank" rel="noreferrer" aria-label={`Open ${title} on YouTube`} key={title}>
-                <Card className="glass-card group h-full cursor-pointer p-stack-md shadow-industrial transition-all hover:-translate-x-0.5 hover:-translate-y-0.5">
+                <Card className="group h-full cursor-pointer border-[#e3e3e3] bg-surface p-stack-md shadow-none transition-colors hover:border-[#b8b8b8]">
                   <div className="relative mb-stack-md aspect-video overflow-hidden bg-surface-container">
                     <Image src={videoImages[index]} alt={title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20"><PlayCircle className="size-10 text-white sm:size-12" /></div>
