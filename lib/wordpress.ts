@@ -57,6 +57,33 @@ function decodeEntities(value = "") {
     .replace(/&#039;/g, "'");
 }
 
+function sanitizeWordPressContent(value = "") {
+  return value.replace(/<(img|iframe)\b([^>]*)>/gi, (tag, tagName: string, attributes: string) => {
+    const dataSrc = attributes.match(/\sdata-src=(["'])(.*?)\1/i)?.[2];
+    let cleanedAttributes = attributes;
+
+    if (dataSrc && /\ssrc=(["'])data:image\/svg\+xml[^"']*\1/i.test(cleanedAttributes)) {
+      cleanedAttributes = cleanedAttributes.replace(/\ssrc=(["'])(.*?)\1/i, ` src="${dataSrc}"`);
+    } else if (dataSrc && !/\ssrc=/i.test(cleanedAttributes)) {
+      cleanedAttributes += ` src="${dataSrc}"`;
+    }
+
+    cleanedAttributes = cleanedAttributes
+      .replace(/\sdata-src=(["'])(.*?)\1/gi, "")
+      .replace(/\sdata-load-mode=(["']?)[^"'\s>]+\1/gi, "")
+      .replace(/\sclass=(["'])(.*?)\1/gi, (_match, quote: string, classNames: string) => {
+        const cleanedClassNames = classNames
+          .split(/\s+/)
+          .filter((className) => className && className !== "lazyload" && className !== "lazyloaded")
+          .join(" ");
+
+        return cleanedClassNames ? ` class=${quote}${cleanedClassNames}${quote}` : "";
+      });
+
+    return `<${tagName}${cleanedAttributes}>`;
+  });
+}
+
 function wordpressSiteUrl() {
   const configuredUrl = (process.env.WORDPRESS_SITE_URL || process.env.WOOCOMMERCE_STORE_URL || "").replace(/\/$/, "");
   if (!configuredUrl) return "";
@@ -99,7 +126,7 @@ async function getCategoryId(slug: string) {
 function toPost(post: WordPressPostResponse): WordPressPost {
   const title = decodeEntities(stripHtml(post.title?.rendered || "Untitled"));
   const excerpt = decodeEntities(stripHtml(post.excerpt?.rendered || ""));
-  const content = post.content?.rendered || "";
+  const content = sanitizeWordPressContent(post.content?.rendered || "");
   const media = post._embedded?.["wp:featuredmedia"]?.[0];
   const mediaSizes = media?.media_details?.sizes;
   const image = mediaSizes?.large?.source_url || mediaSizes?.medium_large?.source_url || mediaSizes?.full?.source_url || media?.source_url;
