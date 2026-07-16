@@ -33,9 +33,9 @@ export default async function Home() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative flex h-[70vh] min-h-[480px] items-center overflow-hidden sm:h-[85vh] sm:min-h-[600px]">
+      <section className="relative flex h-[70vh] min-h-[480px] items-center overflow-hidden sm:h-[76vh] sm:min-h-[560px]">
         <Image src="/images/02_home_hero_office_workstation.png" alt="Commercial office furniture environment" fill priority className="object-cover object-center" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent sm:bg-gradient-to-r sm:from-black/60 sm:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent sm:bg-gradient-to-r sm:from-black/55 sm:via-black/20 sm:to-transparent" />
         <div className="container relative z-10">
           <div className="max-w-2xl text-white">
             <h1 className="mb-stack-md text-3xl font-bold leading-tight tracking-normal sm:text-5xl sm:leading-[56px]">{dictionary.home.heroTitle}</h1>
