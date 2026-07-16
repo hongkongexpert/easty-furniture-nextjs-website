@@ -9,7 +9,7 @@ import { type Locale, categoryLabel, localizedPath, t } from "@/lib/i18n";
 export function ProductCard({ product, square = false, locale = "en" }: { product: Product; square?: boolean; locale?: Locale }) {
   const dictionary = t(locale);
   return (
-    <Card className="group flex flex-col overflow-hidden border-border/60 bg-surface shadow-none transition-colors hover:border-primary/35">
+    <Card className="group flex flex-col overflow-hidden border-border/60 bg-surface shadow-none transition-colors hover:border-foreground/25">
       <Link href={localizedPath(locale, `/product/${product.slug}`)} className={square ? "relative block aspect-square overflow-hidden bg-surface-container-low" : "relative block aspect-[4/3] overflow-hidden bg-surface-container-low"}>
         <Image src={product.image} alt={product.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
       </Link>

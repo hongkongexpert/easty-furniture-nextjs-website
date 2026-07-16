@@ -9,7 +9,7 @@
 
 @layer components {
   .glass-card { @apply border border-white/30 bg-white/70 backdrop-blur-xl; }
-  .active-filter { @apply border-l-2 border-primary pl-3 font-semibold text-primary; }
+  .active-filter { @apply font-semibold text-foreground; }
   .wordpress-content { @apply space-y-5; }
   .wordpress-content > :not(.easty-migrated-gallery):not(.wp-block-gallery) { @apply mx-auto max-w-4xl; }
   .wordpress-content h2 { @apply pt-4 text-2xl font-semibold leading-8; }
