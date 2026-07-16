@@ -26,7 +26,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <main>
-      <div className="container">
+      <div className="container py-stack-lg">
         <div className="mb-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
           <Link href={localizedPath(locale, "/")}>{dictionary.nav.home}</Link>
           <span>/</span>
