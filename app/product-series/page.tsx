@@ -69,7 +69,7 @@ export default async function ProductSeriesPage({ searchParams }: { searchParams
         </aside>
 
         <section className="flex-1 min-w-0">
-          <div className="mb-6 flex items-center justify-between border-b border-border pb-4">
+          <div className="mb-6 flex items-center justify-between border-b border-[#e3e3e3] pb-4">
             <p className="text-sm text-muted-foreground">{filteredProducts.length} {dictionary.productSeries.count}</p>
             {/* Mobile filter trigger */}
             <Sheet>
